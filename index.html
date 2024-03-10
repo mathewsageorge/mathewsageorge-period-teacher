@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h2>WebNFC Attendance</h2>
+    <div id="status">
+        <h4>Hi There 👋</h4>
+        <button id="start-btn">Start</button>
+    </div>
+    <div>
+        <label for="teacher">Teacher Name:</label>
+        <select id="teacher">
+            <option value="John Doe">John Doe</option>
+            <option value="Jane Smith">Jane Smith</option>
+            <!-- Add more options for other teachers -->
+        </select>
+    </div>
+    <div>
+        <label for="period">Period:</label>
+        <select id="period">
+            <option value="Period 1">Period 1</option>
+            <option value="Period 2">Period 2</option>
+            <!-- Add more options for other periods -->
+        </select>
+    </div>
+    <div class="check-type">
+       <div>
+            <input type="radio" id="check-in" name="check" checked>
+            <label for="check-in">Check In</label>
+       </div>
+    </div>
+    <div id="log"></div>
+    <script src="./index.js"></script>
+    
+</body>
+</html>
