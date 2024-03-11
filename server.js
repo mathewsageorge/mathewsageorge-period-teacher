@@ -9,7 +9,7 @@ app.use(cors({ origin: "*" }));
 const port = process.env.PORT || 3000;
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://mathewsgeorge202:ansu@cluster0.ylyaonw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://mathewsgeorge202:ansu@cluster0.ylyaonw.mongodb.net/hai', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -25,8 +25,7 @@ const recordSchema = new mongoose.Schema({
     time: String,
     teacher: String,
     period: String,
-}, { collection: 'ansu' }); // Specify collection name here
-
+}, { collection: 'mathews' }); // Specify collection name here
 
 // Create a model based on the schema
 const Record = mongoose.model('Record', recordSchema);
