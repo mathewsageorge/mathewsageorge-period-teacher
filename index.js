@@ -2,7 +2,6 @@ const $status = document.getElementById("status");
 const $log = document.getElementById("log");
 const $teacher = document.getElementById("teacher");
 const $period = document.getElementById("period");
-const $checkIn = document.getElementById("check-in");
 
 const currentTime = () => {
     return new Date().toString().slice(0, -31);
@@ -12,7 +11,7 @@ let currentStatus = "in"; // Set default status to "in"
 
 const handleNewRecord = async (serialNumber, logData, time, teacher, period) => {
     try {
-        await fetch('https://mathewsageorge-period-teacher.onrender.com', {
+        await fetch('https://mathewsageorge-period-teacher.onrender.com/record', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,17 +22,9 @@ const handleNewRecord = async (serialNumber, logData, time, teacher, period) => 
                 time,
                 teacher,
                 period,
-                status: currentStatus,
             }),
         });
-
-        // Update the DOM to display the received data
-        const $record = document.createElement("div");
-        $record.innerHTML = `\n${serialNumber} - <b>${logData}</b> - ${time} - Teacher: ${teacher} - Period: ${period}`;
-        $log.appendChild($record);
-
-        // Update message
-        $status.innerHTML = `<h4>Last Read</h4>${serialNumber}<br>${currentTime()}`;
+        alert('Record saved successfully');
     } catch (error) {
         console.error('Failed to save record on the server:', error);
         alert('Failed to save record on the server.');
@@ -76,6 +67,10 @@ document.getElementById("start-btn").onclick = (e) => {
     activateNFC();
 };
 
-$checkIn.onchange = () => {
-    currentStatus = $checkIn.checked ? "in" : "out";
+document.getElementById("check-in").onchange = (e) => {
+    e.target.checked && (currentStatus = "in");
+};
+
+document.getElementById("check-out").onchange = (e) => {
+    e.target.checked && (currentStatus = "out");
 };
