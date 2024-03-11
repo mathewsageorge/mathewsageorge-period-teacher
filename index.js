@@ -11,7 +11,7 @@ let currentStatus = "in"; // Set default status to "in"
 
 const handleNewRecord = async (serialNumber, logData, time, teacher, period) => {
     try {
-        await fetch('https://mathewsageorge-period-teacher.onrender.com/record', {
+        await fetch('https://mathewsageorge-period-teacher.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,6 +25,11 @@ const handleNewRecord = async (serialNumber, logData, time, teacher, period) => 
             }),
         });
         alert('Record saved successfully');
+
+        // Update the DOM to display the received data
+        const $record = document.createElement("div");
+        $record.innerHTML = `\n${serialNumber} - <b>${logData}</b> - ${time}`;
+        $log.appendChild($record);
     } catch (error) {
         console.error('Failed to save record on the server:', error);
         alert('Failed to save record on the server.');
