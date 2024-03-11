@@ -2,6 +2,7 @@ const $status = document.getElementById("status");
 const $log = document.getElementById("log");
 const $teacher = document.getElementById("teacher");
 const $period = document.getElementById("period");
+const $checkIn = document.getElementById("check-in");
 
 const currentTime = () => {
     return new Date().toString().slice(0, -31);
@@ -22,14 +23,17 @@ const handleNewRecord = async (serialNumber, logData, time, teacher, period) => 
                 time,
                 teacher,
                 period,
+                status: currentStatus,
             }),
         });
-        alert('Record saved successfully');
 
         // Update the DOM to display the received data
         const $record = document.createElement("div");
-        $record.innerHTML = `\n${serialNumber} - <b>${logData}</b> - ${time}`;
+        $record.innerHTML = `\n${serialNumber} - <b>${logData}</b> - ${time} - Teacher: ${teacher} - Period: ${period}`;
         $log.appendChild($record);
+
+        // Update message
+        $status.innerHTML = `<h4>Last Read</h4>${serialNumber}<br>${currentTime()}`;
     } catch (error) {
         console.error('Failed to save record on the server:', error);
         alert('Failed to save record on the server.');
@@ -72,10 +76,6 @@ document.getElementById("start-btn").onclick = (e) => {
     activateNFC();
 };
 
-document.getElementById("check-in").onchange = (e) => {
-    e.target.checked && (currentStatus = "in");
-};
-
-document.getElementById("check-out").onchange = (e) => {
-    e.target.checked && (currentStatus = "out");
+$checkIn.onchange = () => {
+    currentStatus = $checkIn.checked ? "in" : "out";
 };
